@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Layout/Header';
+import Main from './Layout/Main';
+import Mock  from './Mock/mock.json'
+import Container from "react-bootstrap/Container";
+
+
 
 function App() {
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div fluid="md" className="App">
+      <Header />
+      <Main arr={Mock} />
     </div>
   );
 }
 
 export default App;
+
+
+
+// <Container>
+//   <Row>
+    // {Mock.map((imgSrc, imgAlt) => (
+    //   <Col>
+    //     <Image src={imgSrc} alt={imgAlt} />
+    //   </Col>
+    // ))}
+//   </Row>
+// </Container>;
