@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="header container">
       <div className="title">
-        <h1>חיפוס תמונות</h1>
+        <h1>חיפוש תמונות</h1>
       </div>
     </header>
   );
