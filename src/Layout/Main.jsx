@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Layout/Main.css";
 
 export default function Main(props) {
@@ -7,16 +6,26 @@ export default function Main(props) {
   const [newArr, setNewArr] = useState([]);
 
   // Update the search value when user enter text in search box.
-  const handleOnChange = element => {
-    setSearch(element.target.value);
+  const handleOnChange = e => {
+    setSearch(e.target.value);
   };
 
   // Filter props.array to new array when user press Enter in search box.
-  const handleOnKeyDown = element => {
-    if (element.key === "Enter") {
-      setNewArr(props.arr.filter(element => element.imgAlt.includes(search)));
+  const handleOnKeyDown = e => {
+    if (e.key === "Enter") {
+      // setNewArr(props.arr.filter(element => element.imgAlt.toLowerCase().includes(search.toLowerCase())));
+      window.parent.postMessage({ type: "search", value: search }, "*");
     }
   };
+
+  useEffect(() => {
+    const msgEent = window.addEventListener("message", e => {
+      if (e.origin === "https://www.ikea.co.il") {
+        setNewArr(e.data.results);
+      }
+    });
+    return () => window.removeEventListener("message", msgEent);
+  }, []);
 
   return (
     <main className="main container">
@@ -24,6 +33,7 @@ export default function Main(props) {
         <input
           onKeyDown={handleOnKeyDown}
           onChange={handleOnChange}
+          value={search}
           className="search"
           type="search"
           placeholder="Place text here"
