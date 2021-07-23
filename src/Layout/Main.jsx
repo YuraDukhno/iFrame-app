@@ -13,7 +13,6 @@ export default function Main(props) {
   // Filter props.array to new array when user press Enter in search box.
   const handleOnKeyDown = e => {
     if (e.key === "Enter") {
-      // setNewArr(props.arr.filter(element => element.imgAlt.toLowerCase().includes(search.toLowerCase())));
       window.parent.postMessage({ type: "search", value: search }, "*");
     }
   };
